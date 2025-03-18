@@ -36,6 +36,9 @@ func (g *BalanceOfUniverse) playRound(c int, player1, player2 *player.Player, ve
 		return 0, nil
 	}
 	for {
+		if g.round > 100 {
+			return 3, fmt.Errorf("too many rounds")
+		}
 		if g.round == 0 {
 			if err := player1.Send(strconv.Itoa(g.n)); err != nil {
 				return 1, fmt.Errorf("failed to send n to player 1: %v", err)
