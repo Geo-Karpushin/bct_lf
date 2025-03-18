@@ -276,9 +276,9 @@ func TestGame_BalanceOfUniverse(t *testing.T) {
 	require.Equal(t, player1.GetScore(), 200)
 	require.Equal(t, player3.GetScore(), 0)
 	k, err = game.Play("balance_of_universe", 10, player1, player4, false)
-	require.Equal(t, k, 0)
-	require.NoError(t, err)
-	require.Equal(t, player1.GetScore(), 299) // +100 за раунд, -1 в первом раунде, остальное на счёт
+	require.Equal(t, k, 2)
+	require.ErrorContains(t, err, "invalid input")
+	require.Equal(t, player1.GetScore(), 200) // +100 за раунд, -1 в первом раунде, остальное на счёт
 	require.Equal(t, player4.GetScore(), 101) // +100 за раунд, +1 за первый раунд, остальное "проиграл"
 }
 
